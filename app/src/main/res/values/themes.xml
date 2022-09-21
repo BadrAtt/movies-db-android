@@ -13,4 +13,12 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="MainNavigation" parent="Widget.Design.BottomNavigationView">
+        <item name="itemBackground">@color/orange</item>
+        <item name="itemIconTint">@color/white</item>
+        <item name="itemTextColor">@color/white</item>
+        <item name="android:background">@color/orange</item>
+    </style>
+
 </resources>

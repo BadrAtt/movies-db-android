@@ -18,6 +18,18 @@ object Deps {
             const val constraintLayout = "androidx.constraintlayout:constraintlayout:$version"
         }
 
+        object Navigation {
+            private const val version = "2.5.2"
+            const val navigationFragmentKtx= "androidx.navigation:navigation-fragment-ktx:$version"
+            const val navigationUiKtx = "androidx.navigation:navigation-ui-ktx:$version"
+        }
+
+        object Lifecycle {
+            private const val version = "2.5.1"
+            const val liveDataKtx =
+                "androidx.lifecycle:lifecycle-livedata-ktx:$version"
+        }
+
         object Test {
             object JUnit {
                 private const val version = "1.1.3"
@@ -36,6 +48,23 @@ object Deps {
             private const val version = "1.6.1"
             const val material = "com.google.android.material:material:$version"
         }
+    }
+
+    object Timber {
+        private const val version = "5.0.1"
+        const val timber = "com.jakewharton.timber:timber:$version"
+    }
+
+    object Hilt {
+        private const val version = "2.44"
+        const val hilt = "com.google.dagger:hilt-android:$version"
+        const val hilt_compiler = "com.google.dagger:hilt-android-compiler:$version"
+    }
+
+    object Glide {
+        private const val version = "4.13.2"
+        const val glide = "com.github.bumptech.glide:glide:$version"
+        const val compiler = "com.github.bumptech.glide:compiler:$version"
     }
 
     object Test {

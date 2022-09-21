@@ -4,6 +4,8 @@ import com.elataoui.badr.moviesdb.Deps
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.dagger.hilt.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -35,6 +37,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -43,6 +48,20 @@ dependencies {
     implementation(Deps.Androidx.AppCompat.appCompat)
     implementation(Deps.Google.Material.material)
     implementation(Deps.Androidx.ConstraintLayout.constraintLayout)
+
+    implementation(Deps.Timber.timber)
+
+    implementation(Deps.Hilt.hilt)
+    kapt(Deps.Hilt.hilt_compiler)
+
+    implementation(Deps.Androidx.Navigation.navigationFragmentKtx)
+    implementation(Deps.Androidx.Navigation.navigationUiKtx)
+
+    implementation(Deps.Glide.glide)
+    kapt(Deps.Glide.compiler)
+
+    implementation(Deps.Androidx.Lifecycle.liveDataKtx)
+
     testImplementation(Deps.Test.JUnit.junit)
     androidTestImplementation(Deps.Androidx.Test.JUnit.jUnit)
     androidTestImplementation(Deps.Androidx.Test.Espresso.espressoCore)
