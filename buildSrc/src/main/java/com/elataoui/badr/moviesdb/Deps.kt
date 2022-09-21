@@ -20,7 +20,7 @@ object Deps {
 
         object Navigation {
             private const val version = "2.5.2"
-            const val navigationFragmentKtx= "androidx.navigation:navigation-fragment-ktx:$version"
+            const val navigationFragmentKtx = "androidx.navigation:navigation-fragment-ktx:$version"
             const val navigationUiKtx = "androidx.navigation:navigation-ui-ktx:$version"
         }
 
@@ -65,6 +65,26 @@ object Deps {
         private const val version = "4.13.2"
         const val glide = "com.github.bumptech.glide:glide:$version"
         const val compiler = "com.github.bumptech.glide:compiler:$version"
+    }
+
+    object Serialization {
+        private const val serialization_version = "1.4.0"
+        private const val serialization_converter_version = "0.8.0"
+        const val kotlinxSerialization =
+            "org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_version"
+        const val retrofitKotlinxSerializationConverter =
+            "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:" +
+                    serialization_converter_version
+    }
+
+    object Networking {
+        private const val retrofit_version = ""
+        private const val logging_interceptor_version = "4.9.3"
+        private const val ok2CurlVersion = "0.8.0"
+        const val retrofit = "com.squareup.retrofit2:retrofit:$retrofit_version"
+        const val logging_interceptor = "com.squareup.okhttp3:logging-interceptor:" +
+                logging_interceptor_version
+        const val ok2Curl = "com.github.mrmike:ok2curl:$ok2CurlVersion"
     }
 
     object Test {

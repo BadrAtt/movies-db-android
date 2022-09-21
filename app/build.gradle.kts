@@ -62,6 +62,13 @@ dependencies {
 
     implementation(Deps.Androidx.Lifecycle.liveDataKtx)
 
+    implementation(Deps.Networking.retrofit)
+    implementation(Deps.Networking.logging_interceptor)
+    implementation(Deps.Networking.ok2Curl)
+
+    implementation(Deps.Serialization.retrofitKotlinxSerializationConverter)
+    implementation(Deps.Serialization.kotlinxSerialization)
+
     testImplementation(Deps.Test.JUnit.junit)
     androidTestImplementation(Deps.Androidx.Test.JUnit.jUnit)
     androidTestImplementation(Deps.Androidx.Test.Espresso.espressoCore)
