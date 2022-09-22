@@ -1,6 +1,7 @@
-package com.elattaoui.badr.moviesdb.ui.data.di
+package com.elattaoui.badr.moviesdb.data.di
 
-import com.elattaoui.badr.moviesdb.ui.data.Api
+import com.elattaoui.badr.moviesdb.data.Api
+import com.elattaoui.badr.moviesdb.data.interceptor.DefaultQueryParamsInterceptor
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.moczul.ok2curl.CurlInterceptor
 import com.moczul.ok2curl.logger.Logger
@@ -24,6 +25,7 @@ object NetworkingModule {
     @Singleton
     @Provides
     internal fun providesOkHttp(
+        defaultQueryParamsInterceptor: DefaultQueryParamsInterceptor
     ): OkHttpClient {
 
         val loggingInterceptor = HttpLoggingInterceptor()
@@ -31,6 +33,7 @@ object NetworkingModule {
 
         return OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
+            .addInterceptor(defaultQueryParamsInterceptor)
             .addInterceptor(CurlInterceptor(object : Logger {
                 override fun log(message: String) {
                     Timber.v("Ok2Curl", message)
@@ -43,7 +46,9 @@ object NetworkingModule {
     @Singleton
     @Provides
     fun provideJsonSerializer(): Json {
-        return Json
+        return Json {
+            ignoreUnknownKeys = true
+        }
     }
 
     @OptIn(ExperimentalSerializationApi::class)

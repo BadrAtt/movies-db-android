@@ -5,8 +5,8 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
+import com.elattaoui.badr.moviesdb.data.model.Movie
 import com.elattaoui.badr.moviesdb.databinding.MovieViewBinding
-import com.elattaoui.badr.moviesdb.ui.data.model.Movie
 
 class MovieView : ConstraintLayout {
 

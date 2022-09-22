@@ -87,6 +87,11 @@ object Deps {
         const val ok2Curl = "com.github.mrmike:ok2curl:$ok2CurlVersion"
     }
 
+    object Coroutines {
+        private const val version = "1.6.4"
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
+    }
+
     object Test {
         object JUnit {
             private const val version = "4.13.2"
