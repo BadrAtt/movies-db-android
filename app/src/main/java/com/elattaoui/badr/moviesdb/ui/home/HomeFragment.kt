@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.elattaoui.badr.moviesdb.R
 import com.elattaoui.badr.moviesdb.data.response.MoviesResult
 import com.elattaoui.badr.moviesdb.databinding.FragmentHomeBinding
+import com.elattaoui.badr.moviesdb.utils.EndlessRecyclerViewScrollListener
 import com.elattaoui.badr.moviesdb.utils.GridEqualSpaceItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -21,7 +22,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val homeFragmentViewModel by viewModels<HomeFragmentViewModel>()
     private val moviesListAdapter: MoviesListAdapter by lazy {
-        MoviesListAdapter(listOf())
+        MoviesListAdapter()
     }
 
     override fun onCreateView(
@@ -41,11 +42,10 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupMoviesList()
+        homeFragmentViewModel.fetchPopularMovies(1)
         homeFragmentViewModel.movies.observe(viewLifecycleOwner) { moviesResult ->
             when (moviesResult) {
-                is MoviesResult.Loading -> {
-
-                }
+                is MoviesResult.Loading -> {}
                 is MoviesResult.Error -> {
                     Timber.e(moviesResult.exception)
                     Toast.makeText(
@@ -64,13 +64,31 @@ class HomeFragment : Fragment() {
     private fun setupMoviesList() {
         val itemSpacing = resources.getDimension(R.dimen.movie_item_spacing)
         val itemDecoration = GridEqualSpaceItemDecoration(itemSpacing.toInt())
-        val recyclerViewLayoutManager = GridLayoutManager(requireContext(), 2)
+        val recyclerViewLayoutManager = GridLayoutManager(
+            requireContext(),
+            2
+        ).apply {
+            spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    return when (moviesListAdapter.getItemViewType(position)) {
+                        MoviesListAdapter.TYPE_ITEM -> 1
+                        else -> 2
+                    }
+                }
+            }
+        }
         binding.moviesRecycler.apply {
             adapter = moviesListAdapter
             layoutManager = recyclerViewLayoutManager
             if (itemDecorationCount == 0) {
                 addItemDecoration(itemDecoration)
             }
+            addOnScrollListener(object :
+                    EndlessRecyclerViewScrollListener(recyclerViewLayoutManager) {
+                override fun onLoadMore(page: Int) {
+                    homeFragmentViewModel.fetchPopularMovies(page)
+                }
+            })
         }
     }
 }

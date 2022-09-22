@@ -14,9 +14,9 @@ class MoviesRepository @Inject constructor(
     private val api: Api
 ) {
 
-    fun fetchPopularMovies(): Flow<MoviesResult> {
+    fun fetchPopularMovies(pageNumber: Int): Flow<MoviesResult> {
         return flow<MoviesResult> {
-            val networkResult = api.getPopularMovies()
+            val networkResult = api.getPopularMovies(pageNumber)
             emit(
                 MoviesResult.Success(networkResult.results)
             )
