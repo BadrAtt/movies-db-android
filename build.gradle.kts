@@ -6,5 +6,6 @@ plugins {
     id("com.google.dagger.hilt.android") version "2.44" apply false
     id("org.jetbrains.kotlin.jvm") version "1.7.10"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.7.10"
+    id("androidx.navigation.safeargs.kotlin") version "2.4.2" apply false
 }
 

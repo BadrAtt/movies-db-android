@@ -12,7 +12,6 @@ class DefaultQueryParamsInterceptor @Inject constructor() : Interceptor {
         var request = chain.request()
         val url = request.url.newBuilder()
             .addQueryParameter("api_key", "c9856d0cb57c3f14bf75bdc6c063b8f3")
-            .addQueryParameter("sort_by", "popularity.desc")
             .build()
         request = request.newBuilder().url(url).build()
         return chain.proceed(request)

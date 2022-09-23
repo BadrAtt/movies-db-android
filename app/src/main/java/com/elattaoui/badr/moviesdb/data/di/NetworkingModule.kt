@@ -24,7 +24,7 @@ object NetworkingModule {
 
     @Singleton
     @Provides
-    internal fun providesOkHttp(
+    fun providesOkHttp(
         defaultQueryParamsInterceptor: DefaultQueryParamsInterceptor
     ): OkHttpClient {
 

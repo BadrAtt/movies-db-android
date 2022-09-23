@@ -11,7 +11,7 @@ import com.elattaoui.badr.moviesdb.ui.views.MovieView
 
 
 @SuppressLint("NotifyDataSetChanged")
-class MoviesListAdapter :
+class MoviesListAdapter(val movieItemCallback: (Movie, MovieView.MovieViewAction) -> Unit) :
         RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var moviesList = arrayListOf<Movie>()
@@ -25,7 +25,9 @@ class MoviesListAdapter :
             RecyclerView.ViewHolder(movieItemView.root) {
 
         fun bind(movie: Movie) {
-            movieItemView.root.bind(MovieView.MovieViewData((movie)))
+            movieItemView.root.bind(MovieView.MovieViewData((movie))) { action ->
+                movieItemCallback.invoke(movie, action)
+            }
         }
     }
 

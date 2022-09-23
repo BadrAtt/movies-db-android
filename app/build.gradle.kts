@@ -7,6 +7,7 @@ plugins {
     id("com.google.dagger.hilt.android")
     id("kotlin-kapt")
     id("org.jetbrains.kotlin.plugin.serialization")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {

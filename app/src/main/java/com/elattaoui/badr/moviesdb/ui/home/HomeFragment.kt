@@ -7,10 +7,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.elattaoui.badr.moviesdb.R
+import com.elattaoui.badr.moviesdb.data.model.Movie
 import com.elattaoui.badr.moviesdb.data.response.MoviesResult
 import com.elattaoui.badr.moviesdb.databinding.FragmentHomeBinding
+import com.elattaoui.badr.moviesdb.ui.views.MovieView
 import com.elattaoui.badr.moviesdb.utils.EndlessRecyclerViewScrollListener
 import com.elattaoui.badr.moviesdb.utils.GridEqualSpaceItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +25,9 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val homeFragmentViewModel by viewModels<HomeFragmentViewModel>()
     private val moviesListAdapter: MoviesListAdapter by lazy {
-        MoviesListAdapter()
+        MoviesListAdapter { movie, movieViewAction ->
+            handleMovieAction(movie, movieViewAction)
+        }
     }
 
     override fun onCreateView(
@@ -89,6 +94,17 @@ class HomeFragment : Fragment() {
                     homeFragmentViewModel.fetchPopularMovies(page)
                 }
             })
+        }
+    }
+
+    private fun handleMovieAction(movie: Movie, movieViewAction: MovieView.MovieViewAction) {
+        when (movieViewAction) {
+            MovieView.MovieViewAction.CLICK_MOVIE -> {
+                val action =
+                    HomeFragmentDirections.actionHomeFragmentToMovieDetailsFragment(movie.id)
+                findNavController().navigate(action)
+            }
+            else -> {}
         }
     }
 }
