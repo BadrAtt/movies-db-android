@@ -88,4 +88,12 @@ class MoviesListAdapter(val movieItemCallback: (Movie, MovieView.MovieViewAction
         this.moviesList.addAll(movies)
         notifyDataSetChanged()
     }
+
+    fun updateMovie(movie: Movie) {
+        var updatedMovie = moviesList.find { it.id == movie.id }
+        updatedMovie?.let { _updatedMovie ->
+            updatedMovie = movie
+            notifyItemChanged(moviesList.indexOf(_updatedMovie))
+        }
+    }
 }

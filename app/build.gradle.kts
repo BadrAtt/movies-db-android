@@ -73,6 +73,9 @@ dependencies {
 
     implementation(Deps.Coroutines.coroutines)
 
+    implementation(Deps.Androidx.Room.room)
+    kapt(Deps.Androidx.Room.processor)
+
     testImplementation(Deps.Test.JUnit.junit)
     androidTestImplementation(Deps.Androidx.Test.JUnit.jUnit)
     androidTestImplementation(Deps.Androidx.Test.Espresso.espressoCore)

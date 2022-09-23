@@ -30,6 +30,12 @@ object Deps {
                 "androidx.lifecycle:lifecycle-livedata-ktx:$version"
         }
 
+        object Room {
+            private const val version = "2.4.3"
+            const val room = "androidx.room:room-runtime:$version"
+            const val processor = "androidx.room:room-compiler:$version"
+        }
+
         object Test {
             object JUnit {
                 private const val version = "1.1.3"

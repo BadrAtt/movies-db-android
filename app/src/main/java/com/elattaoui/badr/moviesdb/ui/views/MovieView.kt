@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.elattaoui.badr.moviesdb.R
 import com.elattaoui.badr.moviesdb.data.model.Movie
 import com.elattaoui.badr.moviesdb.databinding.MovieViewBinding
 
@@ -30,8 +31,18 @@ class MovieView : ConstraintLayout {
             .load("$POSTER_BASE_URL${data.movie.posterPath}")
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(binding.moviePoster)
+
+        if (data.movie.isFavorite) {
+            binding.movieFavoriteBtn.setImageResource(R.drawable.ic_baseline_favorite)
+        } else {
+            binding.movieFavoriteBtn.setImageResource(R.drawable.ic_outline_favorite)
+        }
+
         binding.moviePoster.setOnClickListener {
             callback.invoke(MovieViewAction.CLICK_MOVIE)
+        }
+        binding.movieFavoriteBtn.setOnClickListener {
+            callback.invoke(MovieViewAction.ADD_TO_FAVORITE)
         }
     }
 

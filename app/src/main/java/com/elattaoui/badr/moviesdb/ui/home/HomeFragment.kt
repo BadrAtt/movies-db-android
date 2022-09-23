@@ -64,6 +64,11 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+        homeFragmentViewModel.updatedMovie.observe(viewLifecycleOwner) { updatedMovie ->
+            updatedMovie?.let { movie ->
+                moviesListAdapter.updateMovie(movie)
+            }
+        }
     }
 
     private fun setupMoviesList() {
@@ -104,7 +109,9 @@ class HomeFragment : Fragment() {
                     HomeFragmentDirections.actionHomeFragmentToMovieDetailsFragment(movie.id)
                 findNavController().navigate(action)
             }
-            else -> {}
+            else -> {
+                homeFragmentViewModel.handleFavoriteMovie(movie)
+            }
         }
     }
 }
